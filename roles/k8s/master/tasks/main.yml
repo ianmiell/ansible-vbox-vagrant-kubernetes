@@ -66,4 +66,5 @@
   become: false
   copy:
       src: ceph.sh
+      dest: /home/vagrant/
       mode: '0744'
