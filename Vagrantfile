@@ -66,20 +66,12 @@ Vagrant.configure("2") do |config|
             end
         end
     end
-    config.vm.define "k8s-m-1" do |master|
-        master.vm.provision "ansible" do |ansible|
-            ansible.playbook = "roles/ceph.yml"
-        end
-    end
-
-# TO ADD TO VAGRANT - NEW ROLE FOR MASTER
-#    2  git clone --single-branch --branch v1.7.2 https://github.com/rook/rook.git
-#    3  cd rook/cluster/examples/kubernetes/ceph/
-#    4  kubectl create -f crds.yaml -f common.yaml -f operator.yaml
-#    5  kubectl create -f cluster.yaml
-#   85  kubectl create -f kubectl create -f cluster/examples/kubernetes/ceph/csi/rbd/storageclass.yaml
-#   86  kubectl create -f cluster/examples/kubernetes/ceph/csi/rbd/storageclass.yaml
-#       kubectl create -f cluster/examples/mysql.yaml
-#       kubectl create -f cluster/examples/wordpress.yaml
-#       https://github.com/rook/rook/blob/master/Documentation/direct-tools.md#block-storage-tools
 end
+#Vagrant.configure("2") do |config|
+#    config.ssh.insert_key = false
+#    config.vm.define "k8s-m-1" do |master|
+#        master.vm.provision "ansible" do |ansible|
+#            ansible.playbook = "roles/ceph.yml"
+#        end
+#    end
+#end

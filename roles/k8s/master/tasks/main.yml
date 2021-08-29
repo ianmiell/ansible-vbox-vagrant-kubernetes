@@ -49,12 +49,21 @@
   become: false
   local_action: copy content="{{ join_command.stdout_lines[0] }}" dest="./{{ k8s_cluster_name }}-join-command"
 
-- name: Copy rook-toolbox yaml for {{ k8s_master_admin_user }} user
+- name: Clone rook repo
+  become: false
+  git:
+    repo: https://github.com/rook/rook.git
+    dest: /home/vagrant/rook/
+    version: v1.7.2
+
+- name: Copy rook-toolbox yaml
   become: false
   copy:
-      src: "rook-toolbox.yaml"
-      dest: "/home/{{ k8s_master_admin_user }}/"
+      src: rook-toolbox.yaml
+      dest: /home/vagrant/rook/
 
-- name: Run root-toolbox
+- name: Copy ceph.sh
   become: false
-  command: kubectl apply -f /home/{{ k8s_master_admin_user }}/rook-toolbox.yaml
+  copy:
+      src: ceph.sh
+      mode: '0744'
